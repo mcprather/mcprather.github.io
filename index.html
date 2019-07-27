@@ -1,13 +1,58 @@
-<!doctype html>
-<html>
-<head>
-   <meta charset="UTF-8">
-   <title>test</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html><head>  
+        <meta charset="UTF-8">
+        <title>Currency Converter</title>
+    </head>
+    <body style='margin-left: 30px;'>
+    <h1>students</h1>
+    <p>CIT7 students: &nbsp;Exam 1 Scores</p>
+        
+            <input type="button" id='btn' value="Get Student Scores">
+             
+ 	<div id="result"></div>
+ 
+ 	<p>The URL describing how to use the API is : <a href="https://exchangeratesapi.io">https://exchangeratesapi.io</a></p>
+ 	<p> Example of the JSON data format this API returns. An array of student objects.
+    <pre><strong>[
+ {"name":"Alice","midterm":95,"final":97},
+ {"name":"Bryan","midterm":68,"final":80}
+]
+ 	</strong></pre></p>
+    
+    <script>
+   
+    document.addEventListener('DOMContentLoaded', function() {      // when page has loaded, more or less
+													  
+    document.querySelector('#btn').onclick = function(){   // attach to button
 
-   <h1>Github Index Page</h1>
+        var request = new XMLHttpRequest();
+		
+        request.open('GET', 'ex1scores.json');
 
-   <p>Hello Github!</p>
+        request.onload = function(){
 
-</body></html> 
+            var data = JSON.parse(request.responseText);
+			
+            if (request.status == 200) {
+            	var contents = "<table><tr><td>Name</td><td>Midterm</td><td>Final</td></tr>"
+            	for(i = 0; i < data.length; i++) {
+                     contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
+                }
+                contents += "</table>";
+                document.querySelector('#result').innerHTML = contents;
+            }
+            else {
+                document.querySelector('#result').innerHTML = "There was an error.";
+            }
+        }
+
+        request.send(null);
+    };
+
+  });
+   
+   </script>
+   
+   
+    </body>
+</html> 
