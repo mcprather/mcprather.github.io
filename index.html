@@ -11,7 +11,6 @@
              
  	<div id="result"></div>
  
- 	<p>The URL describing how to use the API is : <a href="https://exchangeratesapi.io">https://exchangeratesapi.io</a></p>
  	<p> Example of the JSON data format this API returns. An array of student objects.
     <pre><strong>[
  {"name":"Alice","midterm":95,"final":97},
@@ -34,7 +33,7 @@
             var data = JSON.parse(request.responseText);
 			
             if (request.status == 200) {
-            	var contents = "<table><tr><td>Name</td><td>Midterm</td><td>Final</td></tr>"
+            	var contents = "<table cellspacing='15'><tr><td>Name</td><td>Midterm</td><td>Final</td></tr>"
             	for(i = 0; i < data.length; i++) {
                      contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
                 }
