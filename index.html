@@ -67,6 +67,7 @@
               	// Evaluate the template with an array of menu items and set the HTML
               	compiledHtml = compiledTemplateText({ rows: selected_meal })
               	document.getElementById('peopleTable').innerHTML = compiledHtml; 	
+				console.log(compiledHtml);
        	 	}
         	else {
             	document.querySelector('#peopleTable').innerHTML = "There was an error, or currency symbol not found";
