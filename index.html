@@ -15,6 +15,7 @@
   <body>
   
      <div class="container">
+            <h2>Select a Menu</h2>
       
             <div style='padding: 5px;'>    
                <button type='button' class="btn btn-primary" onClick="getData('breakfast')">Breakfast</button> 
@@ -25,10 +26,8 @@
     
        <!-- <div class="container"> -->
   
-           <h2>Handlebars templates to populate a table with an array of objects using Ajax</h2>
-
-           <h3>array of people objects as a table</h3>
-                <div id="peopleTable"></div>
+           <h3>We filter our dataset by meal</h3>
+                <div id="menuTable"></div>
                 
         </div>   <!-- end class='container'   -->
   </body>
@@ -64,13 +63,13 @@
 
         	if (request.status == 200) {
               	var templateText = document.getElementById('tableTemplate').innerHTML;
-             	 var compiledTemplateText = Handlebars.compile(templateText);
-              	// Evaluate the template with an array of menu items and set the HTML
-              	compiledHtml = compiledTemplateText({ rows: selected_meal })
-              	document.getElementById('peopleTable').innerHTML = compiledHtml; 	
+             	var compiledTemplateText = Handlebars.compile(templateText);
+              	
+              	compiledHtml = compiledTemplateText({ rows: meal_items })
+              	document.getElementById('menuTable').innerHTML = compiledHtml; 	
        	 	}
         	else {
-            	document.querySelector('#peopleTable').innerHTML = "There was an error, or currency symbol not found";
+            	document.querySelector('#menuTable').innerHTML = "There was an error, or menu items not found";
         	}
 		}
 
