@@ -1,56 +1,61 @@
 <!DOCTYPE html>
-<html><head>  <meta charset="UTF-8">
-        <title>students</title>
-</head>
-<body style='margin-left: 30px;'>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Title of the document</title>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+  </head>
 
-    <h1>CIT7 Students</h1>
-    <p>CIT7 students: &nbsp;Exam 1 Scores</p>
-        
-    <input type="button" id='btn' value="Get Student Scores">
-             
- 	<div id="result"></div>
+  <body>
+      <h2>Handlebars templates to populate a table with an array of objects using Ajax</h2>
 
- 	<p> Example of the JSON data structure this Ajax request returns:&nbsp; an array of student objects.
-    <pre><strong>[
- {"name":"Alice","midterm":95,"final":97},
- {"name":"Bryan","midterm":68,"final":80}
-]
- 	</strong></pre></p>
-    
-<script>
-   
-    document.addEventListener('DOMContentLoaded', function() {      // when page has loaded, more or less
-													  
-    	document.querySelector('#btn').onclick = function(){   // attach to button
+      <h3>array of people objects as a table</h3>
+          <div id="peopleTable"></div>
+  </body>
 
-        	var request = new XMLHttpRequest();
-        	request.open('GET', 'ex1scores.json');
+<!-- The script element is used to define the Handlebars template -->
+<script type="text/x-handlebars-template" id="tableTemplate">
+<table>
+  {{#each rows}}
+    <tr>
+        <td>{{Name}}</td><td>{{State}}</td><td>{{Age}}</td>
+    </tr>
+  {{/each}}
+</table>
 
-        	request.onload = function(){
-
-            	var data = JSON.parse(request.responseText);
-			
-            	if (request.status == 200) {
-            		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Midterm</td><td>Final</td></tr>"
-            		for(i = 0; i < data.length; i++) {
-                     	contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
-                	}
-                	contents += "</table>";
-                	document.querySelector('#result').innerHTML = contents;
-            	}
-            	else {
-                	document.querySelector('#result').innerHTML = "There was an error.";
-            	}
-        }
-
-        request.send(null);
-    };
-	
-  });
-   
 </script>
-   
-   
-</body>
+  
+<script>
+    var request = new XMLHttpRequest();
+    var url = "hb6data.json";
+
+    request.open('GET', url);     // open the request
+
+    // Callback function for when request completes
+    request.onload = function() {
+
+        // Extract JSON data from request
+        var data = JSON.parse(request.responseText);
+
+        // Update the result div
+        if (request.status == 200) {
+		      // Get the text for the Handlebars template from the script element.
+              var templateText = document.getElementById('tableTemplate').innerHTML;
+              // Compile the Handlebars template.
+              var compiledTemplateText = Handlebars.compile(templateText);
+              // Evaluate the template with an array of people and set the HTML
+              compiledHtml = compiledTemplateText({ rows: data })
+              document.getElementById('peopleTable').innerHTML = compiledHtml; 	
+        }
+        else {
+            document.querySelector('#peopleTable').innerHTML = "There was an error, or currency symbol not found";
+        }
+    }
+
+    // Send request
+    request.send(null);
+  
+  
+</script>
+
 </html>
