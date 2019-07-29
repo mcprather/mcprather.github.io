@@ -4,10 +4,10 @@
       <meta charset="UTF-8">
       <title>Title of the document</title>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-      <!-- bootstrap -->
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <!-- bootstrap on github   need to use https for these links -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
       
       <style> .btn{margin: 5px} </style>
   </head>
@@ -17,7 +17,7 @@
      <div class="container">
       
             <div style='padding: 5px;'>    
-               <button type='button' class="btn btn-primary" onclick="getData('breakfast')">Breakfast</button> 
+               <button type='button' class="btn btn-primary" onClick="getData('breakfast')">Breakfast</button> 
                <button type='button' class="btn btn-primary">Lunch</button> 
                <button type='button' class="btn btn-primary">Dinner</button> 
             </div>
@@ -50,7 +50,7 @@
 
 	function getData(selected_meal) {
 		var request = new XMLHttpRequest();
-    	request.open('GET', menu_items.json);     // open the request
+    	request.open('GET', 'menu_items.json');     // open the request
 
     	request.onload = function() {
 
@@ -71,12 +71,12 @@
         	else {
             	document.querySelector('#peopleTable').innerHTML = "There was an error, or currency symbol not found";
         	}
-    }
-}
+     }
+
 
     // Send request
     request.send(null);
-  
+  }
   
 </script>
 
