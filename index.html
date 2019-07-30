@@ -2,49 +2,24 @@
 <html>
   <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>menu items</title>
-	  
+      <title>Title of the document</title>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-      <!-- bootstrap on github   need to use https for these links -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-      
-      <style> .btn{margin: 5px} </style>
   </head>
 
   <body>
-  
-     <div class="container">
-            <h2>Select a Menu</h2>
-      
-            <div style='padding: 5px;'>    
-               <button type='button' class="btn btn-primary" onClick="getData('breakfast')">Breakfast</button> 
-               <button type='button' class="btn btn-primary" onClick="getData('lunch')">Lunch</button> 
-               <button type='button' class="btn btn-primary" onClick="getData('dinner')">Dinner</button> 
-            </div>
-      
-    
-       <!-- <div class="container"> -->
-  
-           <h3>We filter our dataset by meal</h3>
-                <div id="menuTable"></div>
-                
-      
-           <p>Menu Data originally provided by  <a href='https://manual.cs50.net/api/food/'>manual.cs50.net/api/food/</a></p>
-		   <p>Items are from HUDS, which is the Harvard University Dining Services. The above link is very old, and no longer leads to information on the food API, and I can find no updated information on attribution.</p>
-           <p>CS 50 is a popular intro to computer science course offered by Harvard University.</p>       
-     </div>   <!-- end class='container'   -->
+      <h2>Handlebars templates to populate a table with an array of objects using Ajax</h2>
+
+      <h3>array of people objects as a table</h3>
+          <div id="peopleTable"></div>
   </body>
 
 <!-- The script element is used to define the Handlebars template -->
 <script type="text/x-handlebars-template" id="tableTemplate">
-<table class="table table-striped">
-   <tr><th>Item</th><th>Meal</th><th>Category</th><th>Portion</th></tr>
+<table>
+   <tr><th>{{name}}</th><th>{{state}}</th><th>{{age}}</th><th>{{flavor}}</th></tr>
   {{#each rows}}
     <tr>
-        <td>{{name}}</td><td>{{meal}}</td><td>{{category}}</td><td>{{portion}}</td>
+        <td>{{name}}</td><td>{{state}}</td><td>{{age}}</td><td>{{flavor}}</td>
     </tr>
   {{/each}}
 </table>
@@ -52,38 +27,26 @@
 </script>
   
 <script>
+    var request = new XMLHttpRequest();
+    var url = "hb6data.json";
+    request.open('GET', url);     // open the request
+	
+    request.onload = function() {
 
-	function getData(selected_meal) {
-		var request = new XMLHttpRequest();
-    	request.open('GET', 'menu_items.json');     // open the request
+        var data = JSON.parse(request.responseText);
 
-    	request.onload = function() {
+        if (request.status == 200) {
+              var templateText = document.getElementById('tableTemplate').innerHTML; // Get template text 
+              var compiledTemplateText = Handlebars.compile(templateText);    // Compile the Handlebars template
+              compiledHtml = compiledTemplateText({ rows: data })      // Evaluate the template
+			  document.getElementById('peopleTable').innerHTML = compiledHtml; 	
+        }
+        else {
+            document.querySelector('#peopleTable').innerHTML = "There was an error, or currency symbol not found";
+        }
+    }
 
-        	var data = JSON.parse(request.responseText);
-			meal_items = data.filter(getMeal)   // filter data for selected meal
-			//console.log(meal_items);
-		
-			function getMeal(item) {
-            	return item.meal == selected_meal;
-        	}
-
-        	if (request.status == 200) {
-              	var templateText = document.getElementById('tableTemplate').innerHTML;
-             	var compiledTemplateText = Handlebars.compile(templateText);
-              	
-              	compiledHtml = compiledTemplateText({ rows: meal_items })
-              	document.getElementById('menuTable').innerHTML = compiledHtml; 	
-       	 	}
-        	else {
-            	document.querySelector('#menuTable').innerHTML = "There was an error, or menu items not found";
-        	}
-		}
-
-
-    // Send request
     request.send(null);
-  }
   
 </script>
-
 </html>
