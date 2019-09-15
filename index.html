@@ -1,0 +1,63 @@
+<!DOCTYPE html> <html><head><meta charset="utf-8"> 
+<style> /* style makes alternate table rows different colors */
+table, th , td {
+border: 1px solid grey;
+border-collapse: collapse;
+padding: 5px;
+}
+table tr:nth-child(odd)	{
+background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+background-color: #ffffff;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js">
+</script>
+</head>
+
+<body ng-app="myApp">
+
+<div ng-controller="menuCtrl">
+<h3>Get a Menu: {{menu}}</h3>
+<button ng-click="getMenu('BREAKFAST')"> Breakfast Menu </button> &nbsp; 
+<button ng-click="getMenu('LUNCH')"> Lunch Menu </button> &nbsp; 
+<button ng-click="getMenu('DINNER')"> Dinner Menu </button>
+<br><br>
+<table>
+<tr><th>Item Name</th><th>Category</th><th>Portion</th></tr>
+
+<tr ng-repeat="i in items | filter: menu">
+<td>{{ i.name }}</td>
+<td>{{ i.category }}</td>
+<td>{{ i.portion }}</td>
+</tr>
+</table>
+
+<br><br>
+
+<p>Menu Data originally provided by 
+<a href='https://manual.cs50.net/api/food/'>manual.cs50.net/api/food/</a></p>
+<p>Items are from HUDS, which is the Harvard University Dining Services. </p>
+<p>CS50 is a popular intro to computer science course offered by Harvard.</p>
+
+{{msg}}
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('menuCtrl', function($scope, $http) {
+   
+   $scope.getMenu = function(menu) {
+	   
+	   $scope.menu = menu;
+       var url = "menu_items.json";      // the whole menu file
+	   
+       $http.get(url).then(function (response) {
+		   $scope.items = response.data;  // assign all items
+       });    //end $http
+   };        // end getMenu
+});          // end controller
+</script>
+</body></html>
