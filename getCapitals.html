@@ -3,27 +3,27 @@
     window.onload = function() {
         // add date to span in h4 tag after page loads
         document.getElementById("Tspan").innerHTML = new Date().toLocaleString(); 
-    }
+   
 
-    document.getElementById('getBtn').onclick = function() { 
-     
-        var url = "dataTable1.html";   // 1. url of file with data we want  
-        var request = new XMLHttpRequest();       // 2. create the XHR object
-        request.open("GET", url);                 // 3. open a GET request
+        document.getElementById('getBtn').onclick = function() { 
+            var url = "dataTable1.html";   // 1. url of file with data we want  
+            var request = new XMLHttpRequest();       // 2. create the XHR object
+            request.open("GET", url);                 // 3. open a GET request
 
-        request.onreadystatechange = function() {   // 4. set up callback function
-            if (request.readyState == 4 && request.status == 200) { 
-               //take returned data, add to division with id='d5'
-               document.getElementById("d5").innerHTML = request.responseText;
-            } 
-        }; 
+            request.onreadystatechange = function() {   // 4. set up callback function
+                if (request.readyState == 4 && request.status == 200) { 
+                   //take returned data, add to division with id='d5'
+                   document.getElementById("d5").innerHTML = request.responseText;
+                } 
+            }; 
 
-        request.send(null);     // 5. send the request
-    } 
+           request.send(null);     // 5. send the request
+       } 
 
-    document.getElementById('getBtn').onclick = function() {
-        document.getElementById("d5").innerHTML = "";  // clear division
-    }
+       document.getElementById('getBtn').onclick = function() {
+           document.getElementById("d5").innerHTML = "";  // clear division
+       }
+ }
 
 </script></head><body>
 
