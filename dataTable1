@@ -1,0 +1,7 @@
+<table>
+   <tr><th>Country</th><th>Capital</th><th>Population</th></tr>
+   <tr><td>France</td><td>Paris</td><td>2161000</td></tr>
+   <tr><td>Switzerlaand</td><td>Bern</td><td>133115</td></tr>
+   <tr><td>Korea</td><td>Seoul</td><td>9776000</td></tr>
+    <tr><td>Mongolia</td><td>Ulan Bator</td><td>1452000</td></tr>
+</table>
