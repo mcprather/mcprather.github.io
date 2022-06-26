@@ -1,0 +1,14 @@
+[
+    {"name":"Alice","state":"Ohio","age":27,"flavor":"Butterpecan"},
+    {"name":"Bryan","state":"Utah","age":40,"flavor":"Cookiedough"},
+    {"name":"Carla","state":"Iowa","age":39,"flavor":"Fudgeripple"},
+    {"name":"David","state":"Utah","age":86,"flavor":"Tittifrutti"},
+    {"name":"Elena","state":"Utah","age":17,"flavor":"Butterpecan"},
+    {"name":"Felix","state":"Iowa","age":33,"flavor":"Butterpecan"},
+    {"name":"Gayle","state":"Iowa","age":17,"flavor":"Fudgeripple"},
+    {"name":"Henry","state":"Ohio","age":21,"flavor":"Fudgeripple"},
+    {"name":"Irene","state":"Utah","age":37,"flavor":"Cookiedough"},
+    {"name":"Jacob","state":"Iowa","age":43,"flavor":"Walnutfudge"},
+    {"name":"Karen","state":"Iowa","age":32,"flavor":"Fudgeripple"},
+    {"name":"Lloyd","state":"Ohio","age":31,"flavor":"Tittifrutti"}
+]

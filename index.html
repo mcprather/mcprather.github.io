@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Title of the document</title>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+  </head>
+
+  <body>
+      <h2>Handlebars templates: populate html table with array of objects using Ajax</h2>
+
+      <h3>array of people objects as a table</h3>
+          <div id="peopleTable"></div>
+  </body>
+
+<!-- The script element is used to define the Handlebars template -->
+<script type="text/x-handlebars-template" id="tableTemplate">
+   <table cellspacing='12'>
+       <tr><th>Name</th><th>State</th><th>Age</th><th>Flavor</th></tr>
+       {{#each rows}}
+            <tr>
+                <td>{{name}}</td><td>{{state}}</td><td>{{age}}</td><td>{{flavor}}</td>
+            </tr>
+       {{/each}}
+   </table>
+</script>
+  
+<script>
+    window.onload = async function() {
+        var url = "hb6data.json";     // the data
+        var response = await fetch(url);
+        if(response.ok) {
+
+            var data = await response.json();
+
+            var templateText = document.getElementById('tableTemplate').innerHTML; // Get template text 
+            var compiledTemplateText = Handlebars.compile(templateText);    // Compile the Handlebars template
+            compiledHtml = compiledTemplateText({ rows: data })             // Evaluate the template
+			document.getElementById('peopleTable').innerHTML = compiledHtml; 	// put html table into division
+        }
+        else {
+            document.querySelector('#peopleTable').innerHTML = "Data not found";
+        }
+
+    }
+  
+</script>
+</html>
