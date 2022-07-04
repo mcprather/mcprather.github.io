@@ -21,7 +21,7 @@ let app = Vue.createApp({
             const response = await fetch('menu_items.json')
             this.results = await response.json()
         },
-		getMeal() {
+		getMenu() {
             if(this.meal != 'no_meal') {
                 this.showTable = true
 			    // filter data form given meal
