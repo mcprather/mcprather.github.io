@@ -1,7 +1,7 @@
 
 
 let app = Vue.createApp({
-    data: function() {     // returns an object of data
+    data() {     // returns an object of data
         return {
             meal: '',          // value is set by the select list
             results: [],       // all 109 data itmes retrieved from the json file
