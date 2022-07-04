@@ -21,14 +21,11 @@ let app = Vue.createApp({
             const response = await fetch('menu_items.json')
             this.results = await response.json()
         },
-		getMenu() {
-            if(this.meal != 'no_meal') {
-                this.showTable = true
-			    // filter data form given meal
-			    this.menu_items = this.results.filter( (item) => item.meal == this.meal );
-            }
-			
-		}
+	getMenu() {
+             this.showTable = true
+	     // filter data form given meal
+	     this.menu_items = this.results.filter( (item) => item.meal == this.meal );		
+	}
    },
     
 })
